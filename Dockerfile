@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:latest
 
 LABEL maintainer="addvalue"
 LABEL email="info@addvalue.de"
@@ -8,15 +8,16 @@ LABEL version="0.1.0"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update -qq && apt-get install -y wget curl locales build-essential git inotify-tools apt-utils
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get install -y nodejs
-RUN npm i npm@latest -g
-
-RUN apt-get update -qq && apt-get install -y wget curl locales build-essential libpq-dev git inotify-tools apt-utils postgresql-client
+RUN apt-get update -qq && apt-get install -y wget curl locales build-essential libpq-dev git inotify-tools apt-utils postgresql-client ca-certificates apt-transport-https ruby ruby-dev rubygems
 RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && dpkg -i erlang-solutions_1.0_all.deb
 RUN apt-get update -qq && apt-get install esl-erlang -y
 RUN apt-get install elixir -y
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs yarn
+RUN npm i npm@latest -g
 
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
