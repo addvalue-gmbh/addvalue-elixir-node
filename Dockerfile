@@ -9,7 +9,8 @@ LABEL version="0.1.0"
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -qq && apt-get install -y wget curl locales build-essential libpq-dev git inotify-tools apt-utils postgresql-client ca-certificates apt-transport-https ruby ruby-dev rubygems
-RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && dpkg -i erlang-solutions_1.0_all.deb
+RUN wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb
+RUN dpkg -i erlang-solutions_2.0_all.deb
 RUN apt-get update -qq && apt-get install esl-erlang -y
 RUN apt-get install elixir -y
 
