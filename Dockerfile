@@ -3,8 +3,8 @@ FROM ubuntu:18.04
 LABEL maintainer="addvalue"
 LABEL email="info@addvalue.de"
 LABEL website="addvalue.de"
-LABEL project_link="https://github.com/addvalue-gmbh/addvalue-node"
-LABEL version="0.1.0"
+LABEL project_link="https://github.com/addvalue-gmbh/addvalue-elixir-node"
+LABEL version="0.1.1"
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -25,6 +25,8 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
 RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
 RUN apt-get update -yqqq
 RUN apt-get install -y google-chrome-stable > /dev/null 2>&1
+
+RUN npm install -g ember-cli
 
 ENV DEBIAN_FRONTEND noninteractive
 
